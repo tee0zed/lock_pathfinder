@@ -1,0 +1,12 @@
+AllCops:
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Max: 60
+Style/Documentation:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
