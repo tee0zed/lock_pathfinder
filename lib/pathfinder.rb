@@ -24,8 +24,11 @@ class Pathfinder
   def process
     # если текущая комбинация не совпадает с конечной берем следующий диск
     until lock.unlocked?
-      try_avoid unless resolve_disk
-      lock.next_disk
+      if resolve_disk
+        lock.next_disk
+      else
+        try_avoid until resolve_disk
+      end
     end
   end
 
@@ -36,7 +39,6 @@ class Pathfinder
     direction = find_direction
     # пока не найдем правильную цифру на диске
     valid = tick(direction) until lock.current_digit_correct? || !valid
-
     valid
   end
 
@@ -48,7 +50,7 @@ class Pathfinder
 
     until tick(direction)
       fail!
-      lock.next_disk
+      fails.times { lock.next_disk }
     end
 
     self.fails = 0
