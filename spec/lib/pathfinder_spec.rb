@@ -26,7 +26,24 @@ RSpec.describe Pathfinder do
 
   describe '#call' do
     context 'with excluded' do
-      # it_behaves_like :tick_sequence
+      let(:secret_combination) { [1, 1, 1] }
+      let(:numbers_range) { 0..9 }
+      let(:excluded) do
+        [
+          [0, 0, 9],
+          [0, 9, 0],
+          [8, 0, 0], # window
+          [0, 0, 1],
+          [0, 1, 0],
+          [1, 0, 0]
+        ]
+      end
+
+      it_behaves_like :tick_sequence
+    end
+
+    context 'with excluded' do
+      it_behaves_like :tick_sequence
 
       context 'with fallback trick' do
         let(:secret_combination) { [2, 0, 1] }

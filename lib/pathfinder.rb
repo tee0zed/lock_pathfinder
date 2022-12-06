@@ -46,11 +46,11 @@ class Pathfinder
     # ищем комбинацию которая поможет обойти запрещенную и возвращаемся в то же место
     memo_disk = lock.current_disk
     lock.next_disk
-    direction = find_direction
+    direction = backtrack(find_direction)
 
     until tick(direction)
       fail!
-      fails.times { lock.next_disk }
+      lock.next_disk
     end
 
     self.fails = 0
